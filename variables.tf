@@ -18,3 +18,14 @@ variable "cluster_name" {
   description = "Cluster name"
   default     = "devops-cluster"
 }
+
+## VPC Variables
+variable "app_server_vpc_name" {
+  description = "GCP VPC name."
+  type = string
+}
+
+variable "app_server_subnet_name" {
+  description = "GCP subnet name."
+  type = string
+}
