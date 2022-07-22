@@ -29,3 +29,15 @@ variable "app_server_subnet_name" {
   description = "GCP subnet name."
   type = string
 }
+
+variable "master_ipv4_cidr_block" {
+  description = "The IP range in CIDR notation to use for the hosted master network"
+  type        = string
+  default     = "192.168.0.0/28"
+}
+
+variable "service_account_name" {
+  description = "GCP service account name."
+  type        = string
+  default     = "app-server-sa"
+}
