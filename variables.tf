@@ -41,3 +41,9 @@ variable "service_account_name" {
   type        = string
   default     = "app-server-sa"
 }
+
+variable "nodepool_name" {
+  description = "Kubernetes node pool name."
+  type = string
+  default = "appserver"
+}
