@@ -12,7 +12,7 @@ resource "google_container_cluster" "app_server" {
   networking_mode          = "VPC_NATIVE"
 
   node_locations = [
-    "${var.google_region}-c"
+    "${var.gcp_region}-c"
   ]
 
   addons_config {
