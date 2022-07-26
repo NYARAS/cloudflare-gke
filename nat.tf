@@ -1,5 +1,5 @@
 resource "google_compute_router" "router" {
-  name    = var.name_name
+  name    = var.router_name
   region  = var.gcp_region
   network = google_compute_network.app_server_vpc.id
 }

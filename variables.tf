@@ -13,12 +13,30 @@ variable "gcp_zone" {
   default = "europe-west1-c"
 }
 
+variable "router_name" {
+  description = "GCP router name"
+  default = "appserver-router"
+}
+
+variable "router_nat_name" {
+  description = "GCP router nat name"
+  default = "appserver-router-nat"
+}
+variable "compute_address_name" {
+  description = "GCP computer address name"
+  default = "appserver-compute-address"
+}
 variable "cluster_name" {
   type        = string
   description = "Cluster name"
   default     = "devops-cluster"
 }
 
+variable "node_machine_type" {
+  type        = string
+  description = "GCP node pool machine type to use."
+  default     = "e2-small"
+}
 ## VPC Variables
 variable "app_server_vpc_name" {
   description = "GCP VPC name."
