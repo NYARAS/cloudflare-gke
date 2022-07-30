@@ -50,4 +50,13 @@ export TF_VAR_app_server_subnet_name=
 # optional, defaults to following values
 export TF_VAR_gcp_zone=europe-west1-c
 export TF_VAR_gcp_region=europe-west1
+export TF_VAR_router_name=appserver-router
+export TF_VAR_router_nat_name=appserver-router-nat
+export TF_VAR_router_compute_address_name=appserver-compute-address
+export TF_VAR_router_cluster_name=devops-cluster
+export TF_VAR_router_master_ipv4_cidr_block=192.168.0.0/28
+export TF_VAR_router_service_account_name=app-server-sa
+export TF_VAR_router_nodepool_name=appserver
+export TF_VAR_router_zone_dns_edit_name=appserver-dns-edit
+export TF_VAR_cloudflare_argo_tunnel_name=appserver-tunne
 ```
