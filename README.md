@@ -110,3 +110,28 @@ spec:
                 port:
                   number: 80
 ```
+
+References
+==========
+### Misc
+* [Merging an upstream repository into your fork](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/merging-an-upstream-repository-into-your-fork)
+
+### Google Cloud
+* [gcloud auth application-default login](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login)
+
+### Cloudflare Tunnel
+* [Protect your web servers from direct attack](https://www.cloudflare.com/en-gb/products/tunnel/)
+### Cloudflare Connect resources
+* [Connect resources](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/)
+
+### GKE and Kubernetes
+* [Labels & Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+* [GKE Network Overview](https://cloud.google.com/kubernetes-engine/docs/concepts/network-overview)
+* [Using environment variables inside of your config](https://kubernetes.io/docs/tasks/inject-data-application/efine-environment-variable-container/#using-environment-variables-inside-of-your-config)
+* [DNS for Services and Pods](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+* [Labels, Selectors, and MatchingLabels](https://medium.com/@zwhitchcox/matchlabels-labels-and-selectors-explained-in-detail-for-beginners-d421bdd05362)
+
+### Terraform
+* [Official Terraform docs on `google_container_cluster`](https://www.terraform.io/docs/providers/google/r/container_cluster.html)
+* [Learn Terraform (with GCP)](https://learn.hashicorp.com/terraform/gcp/intro)
+* [Modules Overview](https://learn.hashicorp.com/terraform/modules/modules-overview)
