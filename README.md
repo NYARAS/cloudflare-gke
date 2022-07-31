@@ -22,6 +22,7 @@ Requirements
 - Helm CLI [installed](https://helm.sh/docs/intro/install/)
 - Domain Name that is controlled by CloudFlare.
 - Cloudflare account with Argo enabled
+- Service Account [Service accounts](https://cloud.google.com/iam/docs/service-accounts) with permissions required by Terraform to provision the infrastructure.
 
 Cloning from Github
 ===================
@@ -59,4 +60,53 @@ export TF_VAR_router_service_account_name=app-server-sa
 export TF_VAR_router_nodepool_name=appserver
 export TF_VAR_router_zone_dns_edit_name=appserver-dns-edit
 export TF_VAR_cloudflare_argo_tunnel_name=appserver-tunne
+```
+
+Deployment
+==========
+1. Create a directory named `google` and move the Service Account Json you created in that directory
+2. Run `terraform init`, `terraform plan -out=development.tfplan` and `terraform apply development.tfplan` to deploy the full stack
+
+Setup
+=====
+Typically takes ~8 mins to fully provision the infrastructure. 
+
+This demo 
+- Create Google Cloud Network rosources (VPC, Subnets, NAT)
+- Creates a Google Cloud (GCP) Kubernetes Engine (GKE)
+- Spins up `nginx-ingress-controller` on GKE cluster using Helm
+- Spins up a Cloudflare Tunnel with 2 replicas on GKE cluster and points it to the `nginx-ingress-controller`
+- Creates Cloudflare token for managing DNS records in the specified zone and creates Kubernetes secret for `external-dns`
+- Spins up `external-dns` to automatically manage DNS records pointing to Cloudflare Tunnel for any Kubernetes ingress resources that use specified Cloudflare zone domain
+- Spins up example application by deploying `httpbin` (https://httpbin.yourzone.com)
+
+Cloudflare Tunnel
+=================
+Deployed Cloudflare Tunnel proxied all traffic to the `nginx-ingress-controller`, which handles the load-balancing based on the ingress resources.
+
+Example of Ingress resource that will expose Kubernetes service through Cloudflare Tunnel by creating a CNAME of `httpbin.yourzone.com` pointing to `gke-tunnel-origin.yourzone.com`.
+
+```yaml
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: httpbin-ingress
+  annotations:
+    # gke-tunnel-origin.yourzone.com is not proxied CNAME to your tunnel
+    # it is created by Terraform in cloudflare-tunnel.tf
+    external-dns.alpha.kubernetes.io/target: gke-tunnel-origin.yourzone.com
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: httpbin.yourzone.com
+    http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: httpbin
+                port:
+                  number: 80
 ```
